@@ -1,6 +1,6 @@
 # RxBus
-¿É×Ô¶¨ÒåÀàĞÍÌæ´úObjectÀàĞÍ
-Java°æ
+å¯è‡ªå®šä¹‰ç±»å‹æ›¿ä»£Objectç±»å‹
+Javaç‰ˆ
 ```Java
 public class RxBus {
     private final FlowableProcessor<Object> mBus;
@@ -34,7 +34,7 @@ public class RxBus {
     }
 }
 ```
-Kotlin°æ
+Kotlinç‰ˆ
 ```Kotlin
 object RxBus {
 
