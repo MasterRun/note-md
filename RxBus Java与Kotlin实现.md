@@ -1,5 +1,4 @@
-# RxBus
-可自定义类型替代Object类型
+# RxBus Java与Kotlin实现
 Java版
 ```Java
 public class RxBus {
@@ -35,6 +34,7 @@ public class RxBus {
 }
 ```
 Kotlin版
+可自定义类型替代Object类型
 ```Kotlin
 object RxBus {
 
