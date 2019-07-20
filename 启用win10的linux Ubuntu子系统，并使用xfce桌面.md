@@ -72,7 +72,7 @@ source /etc/profilea
 ### 4 安装输出图形界面所需要的软件
 下载安装：https://sourceforge.net/projects/vcxsrv/    安装好就可以不用管他了
   
-使用[写好的配置](./attachment/WSL_1ed2aa10-2829-43b2-b0b5-e031d18b7fea-5f7ab706a7a24b8ab7457795a69dfc9a.zip)：双击bat，不建议使用多窗口
+使用[写好的配置](./attachment/WSL_1ed2aa10-2829-43b2-b0b5-e031d18b7fea.zip)：双击bat，不建议使用多窗口
 
 最终如果桌面出现任何显示上的问题，请打开Ubuntu应用，输入并执行 rm -rf ~/.config/xfce4 和 rm -rf ~/.cache/sessions  
 
