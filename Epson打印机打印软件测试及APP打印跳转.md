@@ -22,6 +22,8 @@ desc:此打印机支持连接WiFi或扩散WiFi，保持在统一网段下，软�
 跳转其他APP的activity首先要确定目标activity必须 将export设置为true（通过三方软件可以很容易看到例如：X-plore文件管理软件），在确定这一点之后，可以反编译APP分析跳转目标activity需要的参数
 
 [思路参考](https://blog.csdn.net/tyyj90/article/details/49962009)
+
+建议使用FileProvider，以防APP闪退
 ```java
 public class aActivity extends AppCompatActivity {
     
@@ -31,8 +33,9 @@ public class aActivity extends AppCompatActivity {
          intent.setAction("android.intent.action.SEND");
          intent.setPackage(epsonPrintApkPackageName);
          intent.setClassName(epsonPrintApkPackageName,"epson.print.ActivityDocsPrintPreview");
+         
+         Uri uri = FileProvider.getUriForFile(aContext, aContext.getPackageName() + ".provider", new File(path));
 
-         Uri uri = Uri.fromFile(new File(path));
          intent.putExtra("android.intent.extra.STREAM", uri);
          intent.setType("application/pdf");
          intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
