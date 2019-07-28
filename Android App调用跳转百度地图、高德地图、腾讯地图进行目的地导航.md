@@ -26,14 +26,10 @@ class AClass{
       */
     private boolean isInstalled(String packageName) {
         PackageManager manager = getContext().getPackageManager();
-        //获取所有已安装程序的包信息
-        List<PackageInfo> installedPackages = manager.getInstalledPackages(0);
-        if (installedPackages != null) {
-            for (PackageInfo info : installedPackages) {
-                if (info.packageName.equals(packageName)) {
-                    return true;
-                }
-            }
+        try {
+            return (manager.getApplicationInfo(packageName, 0) != null);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
         }
         return false;
     }

@@ -1,12 +1,14 @@
 # JAVA实现WGS84、百度坐标系、高德坐标系转化工具类
 
 
+<b>```！！！百度坐标转换不准，请使用百度地图sdk转换百度坐标！！！```</b>
 ```java
 /**
  * 各地图API坐标转换;
  * WGS84坐标系：国际上通用的坐标系;
  * GCJ02坐标系：即火星坐标系。
  * BD-09： 百度坐标系
+ * 
  */
 public class PositionUtil {
     
@@ -52,7 +54,7 @@ public class PositionUtil {
  
     /**
      * 火星坐标系 (GCJ-02) 与百度坐标系 (BD-09) 的转换算法 将 GCJ-02 坐标转换成 BD-09 坐标
-     * 
+     *  
      * @param gg_lat
      * @param gg_lon
      */
