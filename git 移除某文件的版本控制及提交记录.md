@@ -29,11 +29,11 @@ git push origin master --force --tags
 
 ### 3、清理git目录
 ```bash
-$ rm -rf .git/refs/original/
+rm -rf .git/refs/original/
 
-$ git reflog expire --expire=now --all
+git reflog expire --expire=now --all
 
-$ git gc --prune=now
+git gc --prune=now
 
 
 Counting objects: 2437, done.
@@ -43,7 +43,7 @@ Counting objects: 2437, done.
 # Total 2437 (delta 1461), reused 1802 (delta 1048)
 
 
-$ git gc --aggressive --prune=now
+git gc --aggressive --prune=now
 
 
 Counting objects: 2437, done.
