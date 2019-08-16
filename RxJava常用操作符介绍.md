@@ -1,11 +1,79 @@
 # RxJava常用操作符介绍
-
+[参考](https://www.jianshu.com/p/823252f110b0)
 - [依赖引入](#依赖引入)
 - [创建操作](#创建操作)
 - [辅助操作](#辅助操作)
 - [变换操作](#变换操作)
 - [线程切换](#线程切换)
 - [取消订阅](#取消订阅)
+
+### 简介
+  RxJava本质上是一个异步操作库，是一个能让你用极其简洁的逻辑去处理繁琐复杂任务的异步事件库。
+
+  Android平台上为已经开发者提供了AsyncTask,Handler等用来做异步操作的类库，那我们为什么还要选择RxJava呢？答案是简洁！RxJava可以用非常简洁的代码逻辑来解决复杂问题；而且即使业务逻辑的越来越复杂，它依然能够保持简洁！再配合上Lambda表达式代码会更加简洁。
+
+  ```Java
+  //Thread版
+  new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                //一些繁重的IO操作
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //回到主线程更新ui
+                    }
+                });
+            }
+        }.start();
+  ```
+  ```Java
+  //RxJava 
+Disposable disposable = Observable.just(1)
+        .observeOn(Schedulers.io())
+        .map(new Function<Integer, Object>() {
+            @Override
+            public Object apply(Integer integer) throws Exception {
+                //一些繁重的IO操作
+                return "your result";
+            }
+        })
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new Consumer<Object>() {
+            @Override
+            public void accept(Object o) throws Exception {
+                //在主线程更新ui
+            }
+        });
+  ```
+  ```Java
+  //RxJava  lamdba版
+  Disposable disposable = Observable.just(1)
+        .observeOn(Schedulers.io())
+        .map(integer -> {
+            //一些繁重的IO操作
+            return "your result";
+        })
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(o -> {
+            //在主线程更新ui
+        });
+  ```
+  ```kotlin
+  //kotlin版
+  val disposable = Observable.just(1)
+        .observeOn(Schedulers.io())
+        .map {
+            //一些繁重的IO操作
+            "your result"
+        }
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe { o ->
+            //在主线程更新ui
+        }
+  ```
 
 ### 依赖引入
 ```groovy
@@ -160,9 +228,66 @@ RxAndroid `2.1.1`
    > 与flatmap类似，保证顺序
 
 ### 线程切换
-1. subscribeOn
-2. observeOn
+1. Schedulers [参考](https://www.jianshu.com/p/12638513424f)
+   - AndroidSchedulers.mainThread()
+    > 在RxAndroid包中，指定Android的UI线程
+   - Schedulers.io()
+    > 用于IO密集型的操作<br>
+    > 读写SD卡文件，查询数据库，访问网络等
+   - Schedulers.computation()
+    > 用于CPU 密集型计算任务，即不会被 I/O 等操作限制性能的耗时操作<br>
+    > xml,json文件的解析，Bitmap图片的压缩取样等
+   - Schedulers.newThread()
+    > 在每执行一个任务时创建一个新的线程(一般不建议)
+   - Scheduler.from(@NonNull Executor executor)
+    > 指定一个线程调度器，由此调度器来控制任务的执行策略。
+   - Schedulers.trampoline()
+    > 在当前线程立即执行任务，如果当前线程有任务在执行，则会将其暂停，等插入进来的任务执行完之后，再将未完成的任务接着执行。
+   - Schedulers.single()
+    > 拥有一个线程单例，所有的任务都在这一个线程中执行，当此线程中有任务执行时，其他任务将会按照先进先出的顺序依次执行。
+  
+2. subscribeOn
+   >来指定对数据的处理运行在特定的线程调度器Scheduler上，直到遇到observeOn改变线程调度器
+   >只生效一次
+3. observeOn
+   > 指定下游操作运行在特定的线程调度器Scheduler上。若多次设定，每次均起作用。
 
 ### 取消订阅
 1. Disposable
+   > 一般情况下subscribe之后会返回Disposable对象，此对象用于取消订阅<br>
+   > 取消订阅后，后续的subscribe方法将不会再执行
+   ```Java
+   public interface Disposable {
+    void dispose();
+    boolean isDisposed();
+   }
+   ```
 2. CompositeDisposable
+   > 类似一个集合，RxJava2提供的Disposable的容器<br>
+   > 可使用`public void dispose()`或`public void clear()`方法批量取消订阅
+
+   > Android开发中，在Activity的onDestroy方法或Fragment当然onDestroyView方法中取消订阅,避免在页面销毁后耗时任务再去更新UI
+
+###  Observable之兄弟姐妹
+|类型|描述|
+|---|---|
+|Observable|能够发射0或n个数据，并以成功或错误事件终止。|
+|Flowable|能够发射0或n个数据，并以成功或错误事件终止。 <br>支持背压，可以控制数据源发射的速度。|
+|Single|只发射单个数据或错误事件。|
+|Completable|不发射数据，只处理 onComplete 和 onError 事件|
+|Maybe|能够发射0或者1个数据，以及完成通通知或异常通知。|
+
+
+
+### 原文链接
+
+[码云](https://gitee.com/runrunrun/note-md/blob/master/RxJava%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%BB%8B%E7%BB%8D.md)
+[github](https://github.com/MasterRun/note-md/blob/master/RxJava%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%BB%8B%E7%BB%8D.md)
+[个人博客]()
+
+### 友情链接
+
+RxBus
+[码云链接](https://gitee.com/runrunrun/note-md/blob/master/RxBus%20Java%E4%B8%8EKotlin%E5%AE%9E%E7%8E%B0.md)
+[github链接](https://github.com/MasterRun/note-md/blob/master/RxBus%20Java%E4%B8%8EKotlin%E5%AE%9E%E7%8E%B0.md)
+[个人博客](http://150g46148t.imwork.net:19001/archives/rxbus)  
