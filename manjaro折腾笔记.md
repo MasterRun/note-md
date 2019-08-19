@@ -31,6 +31,8 @@ Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
 
 需要安装的软件
 - 在上述教程中安装输入法 要软不安装成功！！！
+- pacman -S remmina freerdp libvncserver telepathy-glib gnome-keyring nxproxy spice-gtk3 xorg-server-xephyr 
+- wiresharp
 - sudo pacman -S yaourt
 - sudo pacman -S yay
 - trash-cli  # 模拟回收站，防止暴力的rm，与桌面的回收站兼容
