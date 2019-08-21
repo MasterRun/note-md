@@ -35,6 +35,8 @@ Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
 - wiresharp
 - sudo pacman -S yaourt
 - sudo pacman -S yay
+- sudo pacman -S scrcpy  #android投屏
+- SimpleScreenRecorder
 - trash-cli  # 模拟回收站，防止暴力的rm，与桌面的回收站兼容
   ```bash
   #安装
