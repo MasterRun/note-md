@@ -30,13 +30,35 @@ Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
 [一些软件](https://www.cnblogs.com/starxi/p/11098263.html)
 
 需要安装的软件
-- 在上述教程中安装输入法 要软不安装成功！！！
-- pacman -S remmina freerdp libvncserver telepathy-glib gnome-keyring nxproxy spice-gtk3 xorg-server-xephyr 
-- wiresharp
+- 搜狗输入法
+  > xfce桌面:
+  ```bash
+  sudo pacman -S  fcitx-im fcitx-configtool fcitx-sogoupinyin
+  ```
+  > kde 桌面
+  ```bash
+  sudo pacman -S fcitx-im kcm-fcitx fcitx-sogoupinyin
+  ```
+  >配置环境
+  ```bash
+  sudo echo -e "export GTK_IM_MODULE=fcitx\nexport QT_IM_MODULE=fcitx\nexport XMODIFIERS=@im=fcitx">>~/.xprofile
+  ```
+  > 建议两种都安装吧，在上述教程中安装输入法`fcitx-im`这里几项都要安装，否则可能安装后有问题！！！
+  
+  #下面是一些安装命令
 - sudo pacman -S yaourt
+- sudo pacman -S pacaur
 - sudo pacman -S yay
+
+
+- sudo pacman -S net-tools #ifconfig等工具  
+- pacman -S remmina freerdp libvncserver telepathy-glib gnome-keyring nxproxy spice-gtk3 xorg-server-xephyr #远程桌面
+- wiresharp #用于抓包(目测比较高级)
+- charles  抓包，这个可能比较通用
+
 - sudo pacman -S scrcpy  #android投屏
-- SimpleScreenRecorder
+- SimpleScreenRecorder #录屏
+  
 - trash-cli  # 模拟回收站，防止暴力的rm，与桌面的回收站兼容
   ```bash
   #安装
