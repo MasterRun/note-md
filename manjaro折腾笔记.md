@@ -82,7 +82,7 @@ Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
   source ～./bashrc
 
   ```
-
+- pacman -S zsh  # 终端美化软件参考 https://ohmyz.sh/
 - yay -S wewechat 
 - yaourt -S deepin-wine-tim
 - sudo pacman xorg-xbacklight #调节亮度
