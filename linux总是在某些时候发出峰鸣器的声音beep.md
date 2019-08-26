@@ -13,4 +13,9 @@
 确保/etc/inputrc中有如下一行未被注释
 ```set bell-style none  ```
 之后注销或者重启试试吧<br/>
-我这里还没重启，不知道有没有用
+我这里还没重启，不知道有没有用，貌似可能没用吧
+
+
+### 可能的方法
+在alsamixer修改后
+使用`alsactl store`保存

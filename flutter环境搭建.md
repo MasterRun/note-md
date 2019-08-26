@@ -1,46 +1,46 @@
-# flutter »·¾³´î½¨
+# flutter ç¯å¢ƒæ­å»º
 
-ÉÏÒ»²¨Ïà¹Ø´«ËÍÃÅ
+ä¸Šä¸€æ³¢ç›¸å…³ä¼ é€é—¨
 
-[flutter githubµØÖ·](https://github.com/flutter/flutter)
+[flutter githubåœ°å€](https://github.com/flutter/flutter)
 
-[flutterÈ«¼ÒÍ°µØÖ·](https://github.com/flutter)
+[flutterå…¨å®¶æ¡¶åœ°å€](https://github.com/flutter)
 
-[flutter¹ÙÍø](https://flutter.dev/)
+[flutterå®˜ç½‘](https://flutter.dev/)
 
-[ÖĞÎÄ¹ÙÍø](https://flutter-io.cn/)
+[ä¸­æ–‡å®˜ç½‘](https://flutter-io.cn/)
 
-#### Ê¹ÓÃflutter¾µÏñ
-½«¶ÔÓ¦µÄ¼üÖµÌí¼Óµ½»·¾³±äÁ¿£¬¹úÄÚ½¨ÒéÊ¹ÓÃÉÏº£½»´ó¾µÏñ
+#### [ä½¿ç”¨flutteré•œåƒ](https://flutter.dev/community/china)
+å°†å¯¹åº”çš„é”®å€¼æ·»åŠ åˆ°ç¯å¢ƒå˜é‡ï¼Œå›½å†…å»ºè®®ä½¿ç”¨ä¸Šæµ·äº¤å¤§é•œåƒ
 
-[²Î¿¼](https://flutter.dev/community/china)
-##### Flutter ÉçÇø¾µÏñ
+##### Flutter ç¤¾åŒºé•œåƒ
 
 FLUTTER_STORAGE_BASE_URL: https://storage.flutter-io.cn
 
 PUB_HOSTED_URL: https://pub.flutter-io.cn
 
-##### ÉÏº£½»Í¨´óÑ§ Linux ÓÃ»§×é¾µÏñ
+##### ä¸Šæµ·äº¤é€šå¤§å­¦ Linux ç”¨æˆ·ç»„é•œåƒ
 
 FLUTTER_STORAGE_BASE_URL: https://mirrors.sjtug.sjtu.edu.cn
 
 PUB_HOSTED_URL: https://dart-pub.mirrors.sjtug.sjtu.edu.cn
 
-#### ÏÂÔØÅäÖÃ
+#### ä¸‹è½½é…ç½®
 
-**×¢£ºÏÈÈ·±£Java»·¾³ºóÔÙ½øĞĞÒÔÏÂ²½Öè**
+**æ³¨ï¼šå…ˆç¡®ä¿Javaç¯å¢ƒåå†è¿›è¡Œä»¥ä¸‹æ­¥éª¤**
 
-ÏÂÔØflutter×îĞÂµÄstable°ü£¬½«ÒÔÏÂÂ·¾¶Ìí¼Óµ½path»·¾³±äÁ¿
+ä¸‹è½½flutteræœ€æ–°çš„stableåŒ…ï¼Œå°†ä»¥ä¸‹è·¯å¾„æ·»åŠ åˆ°pathç¯å¢ƒå˜é‡
 ``` path
-#flutterµÄbin
+#flutterçš„bin
 %FLUTTER_HOME%\bin
 
 %FLUTTER_HOME%\.pub-cache\bin
 
-#flutterÄÚÖÃdartµÄbin
+#flutterå†…ç½®dartçš„bin
 %FLUTTER_HOME%\bin\cache\dart-sdk\bin
 ```
 
-Ê¹ÓÃflutter½øĞĞAndroid¿ª·¢ĞèÒª°²×°Android studioÓÃÓÚÅäÖÃ¿ª·¢»·¾³£¨´Ë´¦ÂÔ£©
+ä½¿ç”¨flutterè¿›è¡ŒAndroidå¼€å‘éœ€è¦å®‰è£…Android studioç”¨äºé…ç½®å¼€å‘ç¯å¢ƒï¼ˆæ­¤å¤„ç•¥ï¼‰
+æ³¨æ„ï¼šéœ€è¦å°†android sdkè·¯å¾„æ·»åŠ åˆ°ç¯å¢ƒå˜é‡ä¸­ï¼Œå˜é‡åä¸º`ANDROID_HOME`
 
-Íê³ÉÉÏÊö²½Öèºó Ê¹ÓÃ  ```flutter doctor```  ÃüÁî¼ì²éÊÇ·ñ³É¹¦
+å®Œæˆä¸Šè¿°æ­¥éª¤å ä½¿ç”¨  ```flutter doctor```  å‘½ä»¤æ£€æŸ¥æ˜¯å¦æˆåŠŸ
