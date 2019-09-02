@@ -1,8 +1,8 @@
 # manjaro折腾笔记
 
-https://www.4gml.com/thread-94.htm
-
 https://www.jianshu.com/p/21c39bc4dd31
+
+https://www.4gml.com/thread-94.htm
 
 <b>注：</b>据说刻录镜像的时候选择raw，而不是选择hdd+
 
@@ -21,7 +21,7 @@ sudo vim /etc/pacman.conf
 SigLevel = Optional TrustedOnly
 Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
 ```
-- 注意：配置玩之后惊醒系统更新，否则有些老的库会影响会影响一下软件的安装
+- 注意：配置完之后进行系统更新，否则有些老的库会影响会影响一下软件的安装
 
 [源相关地址](https://mirrors.ustc.edu.cn/help/manjaro.html)
 
@@ -114,7 +114,7 @@ Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
   ![系统代理](./attachment/screenshot_20190817220518.png)
   ![ssr客户端](./attachment/screenshot_20190817220602.png)
 
-   老王的ssr链接是经常刷新的，链接失效或者关闭ssr之后，要吧系统设置为无代理都则无法上网
+   老王的ssr链接是经常刷新的，链接失效或者关闭ssr之后，要把系统设置为无代理都则无法上网
 
 
 - java
@@ -124,4 +124,4 @@ Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
 - idea
 - 向日葵
 - 蒲公英
-- Axure RP 9
+- Axure RP 9 无此软件
