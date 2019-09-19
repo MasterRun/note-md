@@ -1,4 +1,4 @@
-# github提交指定文件
+# git提交指定文件
 [参考](https://blog.csdn.net/tangxinzhuan/article/details/89428745)
 
 ### 方式1
