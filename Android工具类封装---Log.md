@@ -24,13 +24,20 @@ public class LogcatUtil {
      * @return
      */
     private static String generateTag() {
+        int index = 3;
+        String callerClazzName = "";
         Thread thread = Thread.currentThread();
-        StackTraceElement stackTraceElement = thread.getStackTrace()[4];
-        String callerClazzName = stackTraceElement.getClassName();
-        callerClazzName = callerClazzName.substring(callerClazzName.lastIndexOf(".") + 1);
-        String tag = "(%s.java:%s)/%s";
+        StackTraceElement[] stackTraces = thread.getStackTrace();
+        StackTraceElement stackTraceElement;
+        do {
+            stackTraceElement = stackTraces[index];
+            callerClazzName = stackTraceElement.getClassName();
+            callerClazzName = callerClazzName.substring(callerClazzName.lastIndexOf(".") + 1);
+            index++;
+        } while (TextUtils.equals(LogcatUtil.class.getSimpleName(), callerClazzName));
+        String tag = "(%s:%s)/%s";
         String name = thread.getName();
-        tag = String.format(Locale.CHINA, tag, callerClazzName, stackTraceElement.getLineNumber(), name);
+        tag = String.format(Locale.CHINA, tag, stackTraceElement.getFileName(), stackTraceElement.getLineNumber(), name);
         return tag;
     }
 

@@ -4,6 +4,8 @@ https://www.jianshu.com/p/21c39bc4dd31
 
 https://www.4gml.com/thread-94.htm
 
+https://my.oschina.net/langxSpirit/blog/1647000
+
 <b>注：</b>据说刻录镜像的时候选择raw，而不是选择hdd+
 
 ### 关于软件源
