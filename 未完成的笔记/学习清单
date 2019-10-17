@@ -4,7 +4,10 @@ aop
 
 apt  javapoet  注解
 
-aspetcJ asm
+aspetcJ
+(kotlin 使用aop插件aspectjx踩坑之路（防止按钮重复点击）)[https://msd.misuland.com/pd/3181438578597039256]
+
+ asm
 
 jit
 
@@ -15,3 +18,27 @@ dagger2
 flutter
 
 
+
+aop 相关文章
+
+AspectJ 在 Android 中的使用  -- 试试看
+https://blog.csdn.net/yxhuang2008/article/details/94193201
+
+归纳AOP在Android开发中的几种常见用法
+https://www.jianshu.com/p/2779e3bb1f14
+
+Android 中使用AOP   -- Kotlin
+https://www.jianshu.com/p/83c46664b507
+
+Android中的AOP
+https://www.jianshu.com/p/e950683bb247
+
+大话AOP与Android的爱恨情仇   -- 也不错
+https://www.jianshu.com/p/ce42927f6398
+
+AOP 之 AspectJ 全面剖析 in Android (仅供了解)
+https://www.jianshu.com/p/f90e04bcb326
+
+使用aop注意点
+- 可能导致断点失效,因为实际代码的被改变
+- 添加/移除aop在项目时,clean后重新build,否则可能app启动崩溃

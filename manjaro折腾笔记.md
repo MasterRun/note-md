@@ -31,6 +31,8 @@ Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
 
 [一些软件](https://www.cnblogs.com/starxi/p/11098263.html)
 
+https://www.jianshu.com/p/e878f1e36ff4
+
 需要安装的软件
 - 搜狗输入法
   > xfce桌面:
@@ -60,6 +62,7 @@ Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
 
 - sudo pacman -S scrcpy  #android投屏
 - SimpleScreenRecorder #录屏
+- meld 文件对比工具
   
 - trash-cli  # 模拟回收站，防止暴力的rm，与桌面的回收站兼容
   ```bash
