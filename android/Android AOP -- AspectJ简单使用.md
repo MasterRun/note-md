@@ -1,4 +1,4 @@
-# Android AOP -- 简单使用
+# Android AOP -- AspectJ简单使用
 
 本文可能更多使用kotlin，java同理并无差异
 
@@ -8,27 +8,49 @@
 
 aop 切面编程  在另一个角度向你的代码加料
 
+aop三剑客 APT  AspectJ Javassist
+
+### APT
+
+注解处理器
+
+在编译期间生成.java (不仅限于java，kotlin，静态资源等都可以)  
+
+代表框架：DataBinding、Dagger2、ButterKnife、EventBus3
+
+### AspectJ
+
+在编译期间注入代码
+
 拦截<b>任何</b>方法，你可以决定方法是否执行，可以方法执行前后增添额外的操作
 
 通常会和注解或反射一起使用
 
 典型应用场景：
 
-- 日志，埋点  
+- 日志，埋点  用户行为统计  
 - 线程切换  
 - 动态权限申请  
+- 检查网络状态是否可用  
 - 过滤重复点击  
 - 修改三方库的执行逻辑（看具体代码）  
+- 检查用户登录  
 
-## Android AOP 副作用
+### Javassist
+
+代表框架：热修复框架HotFix 、Savior（InstantRun）  
+
+Javassist 是一个编辑字节码的框架，作用是修改编译后的 class 字节码。  
+
+## Android AspectJ 副作用
 
 1. 增加项目编译的压力（aop在代码编译期间进行注入），推荐在gradle中配置是否开启aop
 2. aop未处理好（aop代码编写错误）在build时报错或app启动时直接崩溃
 3. 有可能导致代码报错行数不对
-4. 运行项目时可能会有提示classes.jar被占用或无法访问，此时是哟红电脑管家或其他工具结束掉`java.exe`重新运行即
+4. 运行项目时可能会有提示classes.jar被占用或无法访问，此时用电脑管家或其他工具结束掉`java.exe`重新运行即可
 5. （tip）将aop从项目中去除或关闭aop功能，之后需要clean一下项目
 
-## 项目环境和aop插件
+## 项目环境和AspectJ插件
 
 项目基本环境参考：
 
@@ -36,7 +58,7 @@ aop 切面编程  在另一个角度向你的代码加料
 - gradle插件版本：`classpath 'com.android.tools.build:gradle:3.4.1'`
 - 项目中实用 java8 kotlin androidx （不影响aop）
 
-aop插件和三方库：
+AspectJ插件和三方库：
 
 - 沪江aspectjx插件 classpath : `com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.4`  
 - module中引入插件： `apply plugin: 'com.hujiang.android-aspectjx'`  
@@ -70,6 +92,19 @@ aop插件和三方库：
     ```
 
 ## 使用
+
+AspectJ表达式
+| 表达式类型  | 描述                                       |
+| ----------- | ------------------------------------------ |
+| execution   | 过滤出方法执行时的连接点                   |
+| within      | 过滤出制定类型内方法                       |
+| this        | 过滤当前AOP对象的执行时方法                |
+| target      | 过滤目标对象的执行时方法                   |
+| args        | 过滤出方法执行时参数匹配args的方法         |
+| @within     | 过滤出持有指定注解类型内的方法             |
+| @target     | 过滤目标对象持有指定注解类型的方法         |
+| @args       | 过滤当前执行的传入的参数持有指定注解的方法 |
+| @annotation | 过滤当前执行的持有指定注解的方法           |
 
 ### 场景一：使用aop在activity各个生命周期打印日志
 
@@ -132,4 +167,5 @@ class MyLogAop {
 [安卓AOP三剑客:APT,AspectJ,Javassist](https://www.jianshu.com/p/dca3e2c8608a)  
 [美团热更新（热修复）使用](https://blog.csdn.net/fengyeNom1/article/details/79025908)  
 [神奇的Hook机制，一文读懂AOP编程](https://blog.csdn.net/c10wtiybq1ye3/article/details/87999882)  
-[android AOP面向切面编程 aspectjrt](https://blog.csdn.net/tong6320555/article/details/97755677)
+[android AOP面向切面编程 aspectjrt](https://blog.csdn.net/tong6320555/article/details/97755677)  
+[一文读懂 AOP | 你想要的最全面 AOP 方法探讨](https://www.jianshu.com/p/0799aa19ada1)
