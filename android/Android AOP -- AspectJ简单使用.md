@@ -169,3 +169,4 @@ class MyLogAop {
 [神奇的Hook机制，一文读懂AOP编程](https://blog.csdn.net/c10wtiybq1ye3/article/details/87999882)  
 [android AOP面向切面编程 aspectjrt](https://blog.csdn.net/tong6320555/article/details/97755677)  
 [一文读懂 AOP | 你想要的最全面 AOP 方法探讨](https://www.jianshu.com/p/0799aa19ada1)
+[从Android优雅权限框架理解AOP思想(2) 原理篇](https://www.jianshu.com/p/12295bce18b0)
