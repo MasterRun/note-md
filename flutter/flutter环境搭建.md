@@ -44,3 +44,6 @@ PUB_HOSTED_URL: https://dart-pub.mirrors.sjtug.sjtu.edu.cn
 注意：需要将android sdk路径添加到环境变量中，变量名为`ANDROID_HOME`
 
 完成上述步骤后 使用  ```flutter doctor```  命令检查是否成功
+
+
+  <!-- ! Some Android licenses not accepted.  To resolve this, run: flutter doctor --android-licenses -->

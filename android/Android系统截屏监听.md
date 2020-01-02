@@ -378,9 +378,14 @@ class ContentObserverManager {
          * 解除注册
          */
         public static void unregister() {
-            contentResolver.unregisterContentObserver(internalObserver);
-            contentResolver.unregisterContentObserver(externalObserver);
-
+            if (contentResolver != null) {
+                if (internalObserver != null) {
+                    contentResolver.unregisterContentObserver(internalObserver);
+                }
+                if (externalObserver != null) {
+                    contentResolver.unregisterContentObserver(externalObserver);
+                }
+            }
             contentResolver = null;
             screenshotCallback = null;
             screenshotHandlerThread = null;
@@ -442,7 +447,9 @@ public class ScreenshotObserveUtil {
          * 停止监听
          */
         public static void unregister() {
-            fileObserver.stopWatching();
+            if (fileObserver != null) {
+                fileObserver.stopWatching();
+            }
         }
 
     }
