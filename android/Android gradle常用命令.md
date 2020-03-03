@@ -25,3 +25,17 @@
     gradlew.bat build --refresh-dependencies
 
 ```
+
+``` groovy
+//直接在 build.gradle下添加
+//排除依赖
+configurations{
+    all*.exclude module: "support-fragment"
+}
+//强制依赖
+configurations.all {
+    resolutionStrategy {
+        force 'com.android.support:support-fragment:26.1.0'
+    }
+}
+```

@@ -6,7 +6,7 @@
     > 在Android Studio(版本为3.4.2) 的Tools中可以看到Layout inspector，后续步骤不多说了
  - 使用DDMS的相关工具--Hierarchy View（折腾）
     > 使用过Eclipse开发过android的基本都知道DDMS，虽然转到android studio下，但是DDMS工具依然在android sdk中保留，新版的android studio中已经不支持从as内部打开，这里可以找到sdk下的tools目录，里面有个monitor文件，运行即可打开ddms<br/>
-    在windows菜单中选择Open Perspective，选择Hierarchy View,之后你发现，并不能显示什么。这里巾帼一番百度，总结一下集中原因和方案：<br/>
+    在windows菜单中选择Open Perspective，选择Hierarchy View,之后你发现，并不能显示什么。这里经过一番百度，总结一下集中原因和方案：<br/>
     [参考1](https://www.jianshu.com/p/a2ce59503224)<br/>
     [参考2](https://www.jianshu.com/p/1ee54e3ea9fd)<br/>
     1. 使用这个查看布局需要真机的系统是开发版本，而且root，目测如果使用小米的开发版系统，手机也root，那么问题不大，应该是可以连接成功的
