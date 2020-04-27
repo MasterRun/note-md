@@ -19,11 +19,11 @@ FLUTTER_STORAGE_BASE_URL: https://storage.flutter-io.cn
 
 PUB_HOSTED_URL: https://pub.flutter-io.cn
 
-##### 上海交通大学 Linux 用户组镜像
+##### 清华大学 TUNA 协会
 
-FLUTTER_STORAGE_BASE_URL: https://mirrors.sjtug.sjtu.edu.cn
+FLUTTER_STORAGE_BASE_URL: https://mirrors.tuna.tsinghua.edu.cn/flutter
 
-PUB_HOSTED_URL: https://dart-pub.mirrors.sjtug.sjtu.edu.cn
+PUB_HOSTED_URL: https://mirrors.tuna.tsinghua.edu.cn/dart-pub
 
 #### 下载配置
 

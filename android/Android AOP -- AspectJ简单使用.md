@@ -70,7 +70,7 @@ AspectJ插件和三方库：
 
     ```groovy
         dependencies {
-            classpath 'com.android.tools.build:gradle:3.4.1'x
+            classpath 'com.android.tools.build:gradle:3.4.1'
             //mark  添加如下插件依赖
             classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.4'
         }
@@ -160,6 +160,13 @@ class MyLogAop {
 - `@Pointcut`切入点，参数值为切点表达式  
 - `@Around` 类似的还有`@Before` `@After`,用于包裹切点，或在切点前、切点后执行方法，参数为切点表达式或被`@Pointcut`注解的方法调用  
 - 在`aroundJoinPoint`方法中写了相关获取切点周围数据的方法，并在切点方法执行前后打印日志，完全无需改动原方法的任何代码  
+
+## 副作用
+
+1. 编译时间加长
+2. 编译时可能出现 "classes.jar" 相关提示，是因为编译期间生成的旧的classes.jar被占用无法删除，杀死后台的java.exe再次编辑即可
+3. 切面编写没有提示，错误的话可能导致APP启动直接闪退，现象很明显
+4. 只能对打包进app的代码进行拦截，例如三方库代码，项目代码，对于Android系统源码无法拦截
 
 ## 友情链接
 

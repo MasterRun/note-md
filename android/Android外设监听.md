@@ -153,7 +153,7 @@ public class BluetoothMonitorReceiver extends BroadcastReceiver {
                     type = "手机调节器";
                     break;
                 case BluetoothClass.Device.PHONE_SMART:
-                    type = "手机卫星";
+                    type = "智能手机";
                     break;
                 case BluetoothClass.Device.PHONE_UNCATEGORIZED:
                     type = "未知手机";

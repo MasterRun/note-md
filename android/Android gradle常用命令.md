@@ -10,6 +10,7 @@
 
     # cmd
     gradlew.bat :app:dependencies
+    gradlew.bat :app:dependencies > appDep.txt
 
 
 ```
