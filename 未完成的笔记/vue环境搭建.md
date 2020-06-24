@@ -23,7 +23,7 @@ cnpm install --g vue-cli
 # 查看版本
 vue -v
 # 打开vue ui
-vue iu
+vue ui
 # 重新安装vue-cli最新版
 cnpm i -g @vue/cli
 ```
