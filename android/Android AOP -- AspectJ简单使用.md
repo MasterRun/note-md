@@ -54,15 +54,18 @@ Javassist 是一个编辑字节码的框架，作用是修改编译后的 class 
 
 项目基本环境参考：
 
-- gradle版本：`gradle-5.1.1-all`
+- gradle版本：`gradle-5.1.1-all`、`gradle-5.6.4-all`
 - gradle插件版本：`classpath 'com.android.tools.build:gradle:3.4.1'`
+                `classpath 'com.android.tools.build:gradle:3.4.2'`
 - 项目中实用 java8 kotlin androidx （不影响aop）
 
 AspectJ插件和三方库：
 
-- 沪江aspectjx插件 classpath : `com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.4`  
+- 沪江aspectjx插件 `classpath  'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.4'`  
+                 `classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.10'`
 - module中引入插件： `apply plugin: 'com.hujiang.android-aspectjx'`  
 - aop三方库 aspectrt： `api 'org.aspectj:aspectjrt:1.8.13'`  
+                      `api 'org.aspectj:aspectjrt:1.9.5'`  
 
 ## 详细引入
 
@@ -70,9 +73,12 @@ AspectJ插件和三方库：
 
     ```groovy
         dependencies {
+            //已知兼容的两个版本
             classpath 'com.android.tools.build:gradle:3.4.1'
-            //mark  添加如下插件依赖
+            classpath 'com.android.tools.build:gradle:3.4.2'
+            //mark  添加如下插件依赖  ，以下提供2个版本
             classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.4'
+            classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.10'
         }
     ```
 
@@ -86,8 +92,9 @@ AspectJ插件和三方库：
 
     ```groovy
     dependencies {
-        //aspectjrt aop
+        //aspectjrt aop ，以下提供2个版本
         api 'org.aspectj:aspectjrt:1.8.13'
+        api 'org.aspectj:aspectjrt:1.9.5'
     }
     ```
 
@@ -155,6 +162,60 @@ class MyLogAop {
     }
 }
 ```
+
+```java
+
+@Aspect
+public class ActivityLifecycleLog {
+
+    private static final String TAG = "ActivityLifecycleLog";
+
+    @Pointcut("execution(* android.app.Activity.on**(..))")
+    public void logPointcut() {
+    }
+
+    @Around("logPointcut()")
+    public Object printLifecycleLog(ProceedingJoinPoint joinPoint) throws Throwable {
+
+        //获取方法
+        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+
+        //获取方法所在类名
+        String declaringClassName = signature.getDeclaringType().getSimpleName();
+        //String simpleName = signature.getDeclaringTypeName();
+
+        //获取方法名
+        String methodName = signature.getName();
+
+        //获取参数名
+        String[] parameterNames = signature.getParameterNames();
+        //获取参数类型
+        Class[] parameterTypes = signature.getParameterTypes();
+        //切点（方法）参数
+        Object[] args = joinPoint.getArgs();
+        //切点类型（方法）
+        String kind = joinPoint.getKind();
+
+        //执行切点的this对象
+        Object aThis = joinPoint.getThis();
+        //执行切点的目标对象
+        Object target = joinPoint.getTarget();
+
+        String className = aThis.getClass().getName();
+
+        //切点（方法）源码位置
+        SourceLocation sourceLocation = joinPoint.getSourceLocation();
+
+        Log.d(TAG, String.format("before --  %s#%s", className, methodName));
+        //执行方法
+        Object proceed = joinPoint.proceed();
+        Log.d(TAG, String.format("after --  %s#%s", className, methodName));
+        return proceed;
+    }
+}
+
+```
+
 
 - `@Aspect`注解标识在类上，标识该类为一个切面  
 - `@Pointcut`切入点，参数值为切点表达式  
