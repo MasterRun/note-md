@@ -93,6 +93,27 @@
   - 运行到指定位置
   - 执行表达式
 
+常识补充：
+debuggable
+
+``` groovy
+    buildTypes {
+        release {
+            signingConfig signingConfigs.config_release
+            //开启资源压缩，必须开启混淆
+            shrinkResources false
+            minifyEnabled false
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            signingConfig signingConfigs.config_release
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+```
+
 建议在方法的入参、返回值及类的成员变量上添加
 @NonNull
 @Nullable
