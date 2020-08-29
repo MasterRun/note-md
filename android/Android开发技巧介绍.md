@@ -158,6 +158,8 @@ adb工具
 
 Android Studio升级到4.0+
 
+```groovy
+
 distributionUrl=https\://services.gradle.org/distributions/gradle-6.1.1-all.zip
 
 classpath 'com.android.tools.build:gradle:4.0.1'
@@ -166,6 +168,7 @@ buildFeatures {
     dataBinding = true
     viewBinding = true
 }
+```
 
 ## 本地仓库
 
