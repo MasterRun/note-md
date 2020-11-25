@@ -73,12 +73,12 @@ AspectJ插件和三方库：
 
     ```groovy
         dependencies {
-            //已知兼容的两个版本
-            classpath 'com.android.tools.build:gradle:3.4.1'
-            classpath 'com.android.tools.build:gradle:3.4.2'
-            //mark  添加如下插件依赖  ，以下提供2个版本
-            classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.4'
+            //已知兼容的两个版本  添加插件依赖  ，以下提供2个版本
+            classpath 'com.android.tools.build:gradle:3.4.2' //gradle-plugin 3.2.1 -> gradle 5.4.2
             classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.10'
+
+            classpath 'com.android.tools.build:gradle:3.4.1'
+            classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.4'
         }
     ```
 
@@ -118,7 +118,7 @@ AspectJ表达式
 ```kotlin
 //标识类为切面
 @Aspect
-class MyLogAop {
+class MyLogAspect {
     /**
      * 定义切点
      */
