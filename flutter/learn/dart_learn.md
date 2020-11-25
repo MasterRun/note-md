@@ -94,7 +94,7 @@ getFunc() {
 ### 匿名函数( anonymous function)，或lambda或closure
 
 ```dART
- // 使用forEach遍历: 匿名函数
+  // 使用forEach遍历: 匿名函数
   movies.forEach((item) {
     print(item);
   });
@@ -124,7 +124,8 @@ main(List<String> args) {
   var future = getNetworkData();
   future.then((value) {
     print(value);
-  }).catchError((error) { // 捕获出现异常时的情况
+  }).catchError((error) {
+    // 捕获出现异常时的情况
     print(error);
   });;
 }
@@ -323,9 +324,9 @@ void foo(SendPort sendPort) {
 
 Flutter提供了支持并发计算的compute函数，它内部封装了Isolate的创建和双向通信；
 
-利用它我们可以充分利用多核心CPU，并且使用起来也非常简单；
+以此可以充分利用多核心CPU
 
-注意：下面的代码不是dart的API，而是Flutter的API，所以只有在Flutter项目中才能运行
+注意：以下代码非dart API，而是Flutter API
 
 ```dart
 main(List<String> args) async {
