@@ -1,5 +1,7 @@
 # Flutter
 
+## 初体验
+
 `flutter create learn_flutter`
 
 HelloWorld:
@@ -50,7 +52,13 @@ main(List<String> args) {
 2、父Widget（parent widget）发生改变时，子Widget会被重新构建；
 3、如果Widget依赖InheritedWidget的一些数据，InheritedWidget数据发生改变时
 
-SizedBox设置height属性，可用于占位
+*SizedBox设置height属性，可用于占位* 
+
+*BoxDorection 可用于设置border*
+
+## StatefulWidget
+
+[文章链接](https://mp.weixin.qq.com/s?__biz=Mzg5MDAzNzkwNA==&mid=2247483705&idx=1&sn=56693bb8b23f41757db48df93aae6866&chksm=cfe3f2c6f8947bd097f63f280de61f7b5634d71332f75679923ea4fceeb6f7c31885f0a26f77&scene=178&cur_album_id=1566028536430247937#rd)
 
 一旦Widget中展示的数据发生变化，就重新构建整个Widget
 
@@ -93,3 +101,77 @@ class MyState extends State<MyStatefulWidget> {
 
 **只要数据改变了Widget就需要重新构建（rebuild）**
 
+###  生命周期
+
+- 灰色部分是Flutter内部操作的，不需要手动去设置；
+- 白色部分可以监听到或手动调用
+
+![生命周期](../attachment/../../attachment/flutter_lifecycle_simple.png)
+
+- initState必须调用super
+- didChangeDependencies调用场景
+  1. initState调用
+  2. 从其他对象中依赖一些数据发生改变时，比如InheritedWidget
+
+## 编程范式
+
+- 面向对象编程、面向过程编程、函数式编程、面向协议编程
+
+- 命令式编程、声明式编程
+
+  - 命令式编程：给计算机命令，告诉它我们想做什么事情
+  - 声明式编程：描述目标的性质，当依赖的状态发生改变时，我们通过某些方式通知目标作出响应
+
+## 基础Widget
+
+### 文本
+
+#### 普通文本
+
+- 布局参数：textAlign、textDirection、maxLines、overflow（截断规则）、textScaleFactor（缩放），在构造函数中
+- 样式参数：fontFamily、fontSize、color、shadows，在style中
+
+#### 富文本
+
+TextSpan
+
+TextSpan的children再放置TextSpan即可
+
+### 按钮
+
+- FloatingActionButton
+- RaisedButton
+- FlatButton
+- OutlineButton（边框）
+
+```dart
+color：Colors.orange,//按钮颜色
+hightlightColor：Colors.orange[700],//按下高亮色
+shape：RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),//圆角
+onPressed:(){
+  print("按钮被按了");
+}
+```
+
+elevation:阴影大小
+
+### 图片
+
+构造函数
+
+- Image.assets:加载本地资源图片
+- Image.network:加载网络图片
+
+```dart
+const Image({
+  ...,
+  this.width,//宽
+  this.height,//高
+  this.color,//混合色值
+  this.colorBlendMode,//混合模式
+  this.fit,//缩放模式，fill、cover、contain、fitWidth、fitHeigh
+  this.alignment = Alignment.center,//对齐方式
+  this.repeat = ImageRepeat.noRepeat,//重复模式
+  ...
+})
+```
