@@ -47,10 +47,10 @@ main(List<String> args) {
 - StatelessWidget： 没有状态改变的Widget，通常这种Widget仅仅是做一些展示工作而已；
 - StatefulWidget： 需要保存状态，并且可能出现状态改变的Widget
 
-**build方法被执行：**
-1、StatelessWidget第一次被插入到Widget树中时（第一次被创建时）；
-2、父Widget（parent widget）发生改变时，子Widget会被重新构建；
-3、如果Widget依赖InheritedWidget的一些数据，InheritedWidget数据发生改变时
+**build方法被执行：**  
+1、StatelessWidget第一次被插入到Widget树中时（第一次被创建时）；  
+2、父Widget（parent widget）发生改变时，子Widget会被重新构建；  
+3、如果Widget依赖InheritedWidget的一些数据，InheritedWidget数据发生改变时。
 
 *SizedBox设置height属性，可用于占位* 
 
@@ -94,7 +94,7 @@ class MyStatefulWidget extends StatefulWidget {
 class MyState extends State<MyStatefulWidget> {
   @override
   Widget build(BuildContext context) {
-    return <构建自己的Widget>;
+    return <BuildYourWidget>;
   }
 }
 ```
