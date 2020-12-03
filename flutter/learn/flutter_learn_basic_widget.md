@@ -217,7 +217,7 @@ return TextField(
 如果未手动提供controller，会默认创建
 
 ```dart
-class _TextFoeldDemoState extends State<TextFieldDemo> {
+class _TextFieldDemoState extends State<TextFieldDemo> {
   final textEditingController = TextEditingController()
 
   @override
@@ -234,3 +234,129 @@ class _TextFoeldDemoState extends State<TextFieldDemo> {
   //...
 }
 ```
+
+#### Form表单
+
+##### 基本使用
+
+Form是widget
+
+Form表单的输入框是必须是FormField类型
+
+TextField是StatefulWidget非FormField
+TextFormField是FormField
+
+```dart
+return Form(
+  child: Column(
+    mainAxisAligment: MainAxisAligment.center,
+    children: <Widget>[
+      TextFormField(
+        decoration: InputDecoration(
+          icon: Icon(Icos.people),
+          lableText: "用户名或手机号"
+        )，
+      )，
+      TextFormField(
+        obscureText: true,
+        decoration: InputDecoration(
+          icon: Icon(Icons.lock),
+          labelText: "密码"
+        ),
+      ),
+      SizedBox(height: 16,),
+      Container(
+        width: double.infinity,
+        height: 44,
+        child: RaisedButton(
+          color: Colors.lightGreen,
+          child: Text("注 册",style: TextStyle（fontSize: 20, color: COlors.white),),
+          onPressed: (){
+            print("点击了注册按钮");
+          },
+        ),
+      )
+    ],
+  ),
+);
+```
+
+##### 保存&获取表单数据
+
+1. 自行触发Form的save方法（例如通过点击事件）
+2. 通过Form的key，获取到state，调用save方法
+3. 调用Form的save会触发FormField的onSaved回调方法
+4. 在onSaved方法中存相关的值即可
+
+```dart
+class FormDemo extends StatefulWdget {
+  @override
+  _FormDemoState createState() => _FormDemoState();
+}
+
+class _FormDemoState extends State<FormDemo> {
+  final registerFormKey = GlobalKey<FormState>();
+  String username, password;
+  void registerForm(){
+    registerFormKey.currentState.save();
+
+    print("username:$username password:$password");
+  }
+
+  @override
+  Widget build(BuildContext  context) {
+    return Form(
+      key: registerFormKey,
+      child: Column(
+        mainAxisALigment: MainAxisAligment.center,
+        children: <Widget>[
+          TextFormField(
+            decoration: InputDecoration(
+              icon: Icon(Icons.people),
+              labelText: "用户名或手机号"
+            ),
+            onSaved: (value) {
+              this.username = value;
+            },
+          ),
+          TextFormField(
+            obscureText: true,
+            decoration: InputDecoration(
+              icon: Icon(Icons.lock),
+              labelText: "密码"
+            ),
+            onSaved: (value) {
+              this.password = value;
+            },
+          ),
+          SizedBox(height: 16,),
+          Container(
+            width: double.infinity,
+            height: 44,
+            child: RaisedButton(
+              color: Colors.lightGreen,
+              child: Text("注 册", style: TextStyle(fontSize: 20, color: Colors.white),),
+              onPressed: registerForm,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+```
+
+##### 验证
+
+registerFormKey.currentState.validate();方法可触发FormField的validator：
+
+```dart
+validator: (value) {
+  if(value.isEmpty){
+    return "账号不能为空";
+  }
+  return null;
+}
+```
+
+可使用autovalidate: true设置为自动验证
