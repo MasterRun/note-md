@@ -10,57 +10,89 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: '豆瓣',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
+  MyHomePage({Key key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  var _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
+      body: IndexedStack(
+        index: _currentIndex,
+        children: [
+          home(),
+          subject(),
+          group(),
+          mail(),
+          profile(),
+        ],
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            StarRating(rating: 5.6),
-            DashedLine(axis: Axis.vertical,count:40)
-          ],
-        ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        selectedFontSize: 14,
+        unselectedFontSize: 12,
+        type: BottomNavigationBarType.fixed,
+        items: [
+          createItem("首页"),
+          createItem("书影院"),
+          createItem("小组"),
+          createItem("市集"),
+          createItem("我的"),
+        ],
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),
+    );
+  }
+
+  Widget home() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        StarRating(rating: 5.6),
+        DashedLine(axis: Axis.vertical, count: 40)
+      ],
+    );
+  }
+
+  Widget subject() {
+    return Text("subject");
+  }
+
+  Widget group() {
+    return Text("group");
+  }
+
+  Widget mail() {
+    return Text("mail");
+  }
+
+  Widget profile() {
+    return Text("profile");
+  }
+
+  BottomNavigationBarItem createItem(String title) {
+    return BottomNavigationBarItem(
+      icon: Icon(Icons.night_shelter),
+      label: title,
     );
   }
 }
