@@ -64,12 +64,15 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget home() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        StarRating(rating: 5.6),
-        DashedLine(axis: Axis.vertical, count: 40)
-      ],
+    return Container(
+      alignment: Alignment.center,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          StarRating(rating: 5.6),
+          DashedLine(axis: Axis.vertical, count: 40)
+        ],
+      ),
     );
   }
 
@@ -78,7 +81,10 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget group() {
-    return Text("group");
+    return Container(
+      alignment: Alignment.center,
+      child: Text("group"),
+    );
   }
 
   Widget mail() {
