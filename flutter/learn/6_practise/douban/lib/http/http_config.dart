@@ -2,6 +2,8 @@ const baseUrl = "http://123.207.32.32:8080";
 
 const timeout = 5000;
 
+//https://movie.douban.com/j/chart/top_list?type=24&interval_id=100%3A90&action=&start=0&limit=20
+
 //https://movie.querydata.org/api?id=
 
 //棒 少年  34930862

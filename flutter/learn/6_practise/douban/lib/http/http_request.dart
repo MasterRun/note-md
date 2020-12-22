@@ -1,7 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-
-import "http_config.dart";
 
 class HttpRequest {
   //创建实例对象
@@ -18,7 +15,10 @@ class HttpRequest {
           await dio.request(url, queryParameters: params, options: options);
       return response.data;
     } on DioError catch (e) {
-      throw e;
+      print("dio error: ${e.message}");
+      // throw e;
+    } catch (e) {
+      print("error: :${e.message}");
     }
   }
 
@@ -37,6 +37,9 @@ class HttpRequest {
     for (var sub in subjects) {
       searchSubjects.add(SearchSubject.fromMap(sub));
     }
+    searchSubjects.sort((a, b) {
+      return a.rate.compareTo(b.rate);
+    });
     return searchSubjects;
   }
 }
@@ -48,12 +51,12 @@ class SearchSubject {
   String title;
   String url;
   String cover;
-  int id;
+  String id;
   bool isNew;
   bool playable;
 
   SearchSubject.fromMap(Map<String, dynamic> map) {
-    this.rate = map['rate'];
+    this.rate = double.tryParse(map['rate']) ?? -1;
     this.coverX = map['cover_x'];
     this.coverY = map['cover_y'];
     this.title = map['title'];
