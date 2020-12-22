@@ -23,7 +23,10 @@ class HttpRequest {
   }
 
   static Future<List<SearchSubject>> searchMovie(
-      String type, String tag, int start, int count) async {
+      {String type = "tv",
+      String tag = "热门",
+      int start = 0,
+      int count = 50}) async {
     final url =
         "https://movie.douban.com/j/search_subjects?type=${type}&tag=${tag}&page_limit=${count}&page_start=${start}";
 

@@ -1,6 +1,7 @@
 import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'http/http_request.dart';
 
 void main() {
   runApp(MyApp());
@@ -28,6 +29,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   var _currentIndex = 0;
+
+  @override
+  void initState() { 
+    super.initState();
+    HttpRequest.searchMovie().then((value) => print(value));
+  }
 
   @override
   Widget build(BuildContext context) {
