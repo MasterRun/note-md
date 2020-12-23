@@ -40,7 +40,9 @@ class _HomeContentState extends State<HomeContent> {
     return ListView.builder(
       itemCount: searchItems.length,
       itemBuilder: (context, index) {
-        return MovieListItem(searchItems[index]);
+        var searchItem = searchItems[index];
+        searchItem.rank = index + 1;
+        return MovieListItem(searchItem);
       },
     );
   }

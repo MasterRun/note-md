@@ -54,9 +54,10 @@ class SearchSubject {
   String id;
   bool isNew;
   bool playable;
+  int rank;
 
   SearchSubject.fromMap(Map<String, dynamic> map) {
-    this.rate = double.tryParse(map['rate']) ?? -1;
+    this.rate = double.tryParse(map['rate']) ?? 0;
     this.coverX = map['cover_x'];
     this.coverY = map['cover_y'];
     this.title = map['title'];

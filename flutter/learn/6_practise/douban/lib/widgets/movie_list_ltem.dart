@@ -1,5 +1,7 @@
 import 'package:douban/http/http_request.dart';
+import 'package:douban/widgets/star_rating.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class MovieListItem extends StatelessWidget {
   final SearchSubject subject;
@@ -41,7 +43,7 @@ class MovieListItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(3),
       ),
       child: Text(
-        "No. 1",
+        "No. ${subject.rank}",
         style: TextStyle(fontSize: 18, color: Color.fromARGB(255, 131, 95, 36)),
       ),
     );
@@ -52,6 +54,7 @@ class MovieListItem extends StatelessWidget {
    */
   Widget getMovieContentWidget() {
     return Container(
+      height: 150,
       child: Row(
         children: [
           getContentImage(),
@@ -85,18 +88,59 @@ class MovieListItem extends StatelessWidget {
   }
 
   Widget getContentImage() {
-    return Container(
-      // width: subject.coverX.toDouble() / 10,
-      // height: subject.coverY.toDouble() / 10,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(5),
-        child: Image.network(subject.cover),
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(5),
+      // clipBehavior:cli,
+      child: Image.network(
+        subject.cover,
+        fit: BoxFit.fitHeight,
       ),
     );
   }
 
   Widget getContentDesc() {
-    return Container();
+    return Container(
+      padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Icon(
+                Icons.slow_motion_video_sharp,
+                color: Colors.red,
+              ),
+              Text(
+                subject.title,
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w800,
+                ),
+              )
+            ],
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          Row(
+            children: [
+              StarRating(
+                rating: subject.rate,
+                size: 20,
+              ),
+              Text(subject.rate.toString())
+            ],
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          Text("喜剧 喜剧 演员 演员")
+        ],
+      ),
+    );
   }
 
   Widget getDashLine() {
