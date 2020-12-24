@@ -1,4 +1,5 @@
 import 'package:douban/http/http_request.dart';
+import 'package:douban/widgets/dashed_line.dart';
 import 'package:douban/widgets/star_rating.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -88,19 +89,23 @@ class MovieListItem extends StatelessWidget {
   }
 
   Widget getContentImage() {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(5),
-      // clipBehavior:cli,
-      child: Image.network(
-        subject.cover,
-        fit: BoxFit.fitHeight,
+    return Container(
+      width: 100,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(5),
+        // clipBehavior:cli,
+        child: Image.network(
+          subject.cover,
+          fit: BoxFit.fitHeight,
+        ),
       ),
     );
   }
 
   Widget getContentDesc() {
     return Container(
-      padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+      width: 210,
+      padding: EdgeInsets.fromLTRB(15, 10, 15, 0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -112,12 +117,16 @@ class MovieListItem extends StatelessWidget {
                 Icons.slow_motion_video_sharp,
                 color: Colors.red,
               ),
-              Text(
-                subject.title,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w800,
+              SizedBox(width: 5),
+              Container(
+                width: 150,
+                child: Text(
+                  subject.title,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w800,
+                  ),
                 ),
               )
             ],
@@ -144,10 +153,34 @@ class MovieListItem extends StatelessWidget {
   }
 
   Widget getDashLine() {
-    return Container();
+    return Container(
+      child: DashedLine(
+        axis: Axis.vertical,
+        count: 40,
+      ),
+    );
   }
 
   Widget getContentWish() {
-    return Container();
+    return Container(
+      padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
+      width: 45,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: 30,
+          ),
+          Icon(
+            Icons.local_florist,
+            color: Colors.orange,
+          ),
+          Text(
+            "想看",
+            style: TextStyle(color: Colors.orange),
+          ),
+        ],
+      ),
+    );
   }
 }
