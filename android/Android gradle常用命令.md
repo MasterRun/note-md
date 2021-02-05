@@ -40,3 +40,15 @@ configurations.all {
     }
 }
 ```
+
+如果还是用重复依赖，检查项目中的其他module是否是使用了不同的lib版本
+
+
+- 报错处理
+
+Execution failed for task ':app:dataBindingGenBaseClassesDebug'.
+Parameter 'directory' is not a directory
+
+```cmd
+./gradlew assembleDebug --rerun-tasks
+```
