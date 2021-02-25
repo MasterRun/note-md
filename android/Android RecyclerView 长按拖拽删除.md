@@ -167,6 +167,7 @@ class TopMessageWindow(activity: Activity, mWidth: Int = ViewGroup.LayoutParams.
                         Collections.swap(list, i, i - 1)
                     }
                 }*/
+                // 视觉效果 item 交换，使用notifyItemMoved，不调用则不交换
                 recyclerView.adapter?.notifyItemMoved(fromPosition, toPosition)
                 return true
             }
