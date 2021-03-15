@@ -52,3 +52,24 @@ Parameter 'directory' is not a directory
 ```cmd
 ./gradlew assembleDebug --rerun-tasks
 ```
+
+- 打包aar附带源码
+
+```groovy
+// 源代码一起打包(不需要打包源代码的不要添加这几行)
+task androidSourcesJar(type: Jar) {
+    if (project.hasProperty("android")) {
+        //支持java / kotlin源码上传
+        from android.sourceSets.main.java.srcDirs
+        //以下代码无法将kotlin源码上传
+//        from android.sourceSets.main.java.sourceFiles
+    } else {
+        println project
+        from sourceSets.main.allSource
+    }
+    classifier = 'sources'
+}
+artifacts {
+    archives androidSourcesJar
+}
+```
