@@ -69,3 +69,6 @@ branch_name是需要删除的本地分支
 ```bash
 git branch -m old_branch new_branch 
 ```
+
+#### 认为unchanged
+git update-index --assume-unchanged local.properties
