@@ -72,3 +72,8 @@ git branch -m old_branch new_branch
 
 #### 认为unchanged
 git update-index --assume-unchanged local.properties
+
+#### 忽略换行问题
+git config --global core.autocrlf true
+
+https://blog.csdn.net/github_30605157/article/details/56680990
