@@ -33,3 +33,7 @@ source ~/.bash_profile
 在终端中输入jdk7、jdk8 切换版本，通过java -version 查看版本
 
 通过`/usr/libexec/java_home -V`查看jdk及当前使用版本
+
+- 其他jdk：
+azul版本jdk：
+https://www.azul.com/
