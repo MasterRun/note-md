@@ -37,3 +37,5 @@ source ~/.bash_profile
 - 其他jdk：
 azul版本jdk：
 https://www.azul.com/
+
+注：M1的mac在使用tinker gradle命令打补丁包时会提示SevenZip相关exe文件找不到，需要使用intel架构的jdk运行gradle命令，此依赖暂不支持arm架构
