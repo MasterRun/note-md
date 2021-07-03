@@ -1,10 +1,12 @@
 #!/bin/zsh
-echo "\r\n=========   start   ========== \r\n"
+echo "\r\n----------   start   ----------\r\n"
 
 # 渠道
 channelStr=(sit sit2 pre prod)
 # 默认识别 debug release
 channelAllKnown=(debug release)
+
+currentVarient=(sit debug)
 
 packageName="com.dejiplaza.deji"
 launchActivity="$packageName/.ui.welcome.FlashActivity"
@@ -79,6 +81,7 @@ checkAdb() {
 }
 checkAdb
 
+# 首字母大写
 upcaseFirstLetter() {
     inStr=$1
     firstLetter=$inStr[1]
@@ -89,6 +92,40 @@ upcaseFirstLetter() {
     echo $inStr
 }
 
+# 读当前的variant
+readCurrentVariant() {
+
+    filename=$(pwd)"/.idea/modules/app/Deji-dev.app.iml"
+    echo "${filename}"
+    lineKeyWord="SELECTED_BUILD_VARIANT"
+
+    # echo "$(<$filename)"
+    # 遍历行
+    variant=""
+    for i (${(f)"$(<$filename)"}) {
+        # 取带有关键词的行
+       if (( $i[(I)$lineKeyWord] )) {
+            # 使用 value 进行分割
+          separated="${i[(ws:value:)2]}"
+          # 因为引号影响，强行裁剪
+          variant=$separated[3,-6]
+          break
+       }
+    }
+    # echo $variant
+    #转成小写
+    variant=${variant:l}
+    centerIndex=0
+    for i ($channelAllKnown) {
+        centerIndex=${variant[(I)$i]}
+        if (( $centerIndex )) {
+            break
+        }
+    }
+    currentVarient[1]=${variant[0,centerIndex-1]}
+    currentVarient[2]=${variant[centerIndex,-1]}
+}
+
 uninstallApkIfNeed(){
     if (( $in_opts[5] )){
         echo "uninstall $packageName"
@@ -96,20 +133,22 @@ uninstallApkIfNeed(){
     }
 }
 
-# 如果有参数
-if (( $allArgsCount )) {
+# 如果有参数 或者 没设备
+if (( $allArgsCount || $hasDevices==0 )) {
 
-    # 交集 查找指定的渠道类型,默认为debug
+    readCurrentVariant
+
+    # 交集 查找指定的渠道类型,默认为sit
     channel=${*:*channelStr}
     if (( $#channel == 0 )) {
-        channel=$channelStr[1]
+        channel=$currentVarient[1]
     }
     # echo channel is $channel
 
     # 交集 查找 release 或 debug,如果未指定，默认为debug
     allKnowChannel=${*:*channelAllKnown}
     if (( $#allKnowChannel == 0 )) {
-        allKnowChannel=$channelAllKnown[1]
+        allKnowChannel=$currentVarient[2]
     }
     # echo use $allKnowChannel channel
 
@@ -146,4 +185,4 @@ if (( $hasDevices )) {
     echo launching
     adb shell am start $launchActivity
 }
-echo "\r\n=========   complete   =========="
+echo "\r\n----------   complete   ----------"
