@@ -9,7 +9,7 @@ channelAllKnown=(debug release)
 currentVarient=(sit debug)
 
 packageName="com.dejiplaza.deji"
-launchActivity="$packageName/.ui.welcome.FlashActivity"
+pageName=".ui.welcome.FlashActivity"
 
 hasDevices=0
 
@@ -17,11 +17,12 @@ hasDevices=0
 # c -> gradlew clean
 # i -> 直接安装指定渠道包
 # I -> 直接使用 gradlew install 系列命令
-# l -> launch(默认)
+# l -> 不安装直接launch（不使用此ops默认最后launch）
+# p -> 指定page
 # u -> uninstall
 cleanOps="clean"
 in_opts=("" 0 0 0 0) #默认值为0
-while { getopts iIcl arg } {
+while { getopts iIclp: arg } {
     case $arg {
         (c)
         in_opts[1]=$cleanOps
@@ -35,12 +36,17 @@ while { getopts iIcl arg } {
         in_opts[3]=1
         ;;
 
-        # (l)
-        # echo $arg option with arg: $OPTARG
-        # ;;
+        (l)
+        in_opts[4]=1
+        ;;
 
         (u)
         in_opts[5]
+        ;;
+
+        (p)
+        # echo $arg option with arg: $OPTARG
+        pageName=$OPTARG
         ;;
     }
 }
@@ -133,9 +139,13 @@ uninstallApkIfNeed(){
     }
 }
 
-# 如果有参数 或者 没设备
-if (( $allArgsCount || $hasDevices==0 )) {
+sendNotification(){
+    osascript -e "beep"
+    osascript -e "display notification \"variant $2\" with title \"app_run $1\""
+}
 
+# 如果有参数 或者 没设备  且 没指定仅启动
+if (( $allArgsCount || $hasDevices==0 )) && (( $in_opts[4]==0 )) {
     readCurrentVariant
 
     # 交集 查找指定的渠道类型,默认为sit
@@ -155,6 +165,11 @@ if (( $allArgsCount || $hasDevices==0 )) {
     # 通过首字母大写 拼接gradle命令的后半截
     gradleScriptSuffix=$(upcaseFirstLetter $channel)$(upcaseFirstLetter $allKnowChannel)
     echo channel is $gradleScriptSuffix
+
+    if [[ $#gradleScriptSuffix == 0 ]] {
+        sendNotification Error "channel error"
+        exit 1
+    }
 
     if (( $in_opts[3] )) {
         uninstallApkIfNeed
@@ -182,7 +197,10 @@ if (( $allArgsCount || $hasDevices==0 )) {
 
 if (( $hasDevices )) {
     # launch
-    echo launching
+    launchActivity="$packageName/$pageName"
+    echo launching $launchActivity
     adb shell am start $launchActivity
 }
 echo "\r\n----------   complete   ----------"
+
+sendNotification "Complete!" ${gradleScriptSuffix}
