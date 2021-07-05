@@ -18,11 +18,13 @@ hasDevices=0
 # i -> 直接安装指定渠道包
 # I -> 直接使用 gradlew install 系列命令
 # l -> 不安装直接launch（不使用此ops默认最后launch）
-# p -> 指定page
+# O -> open finder
 # u -> uninstall
+# p -> 指定page
 cleanOps="clean"
-in_opts=("" 0 0 0 0) #默认值为0
-while { getopts iIclp: arg } {
+#        c i I l u O
+in_opts=("" 0 0 0 0 0) #默认值为0
+while { getopts ciIlOp: arg } {
     case $arg {
         (c)
         in_opts[1]=$cleanOps
@@ -41,7 +43,11 @@ while { getopts iIclp: arg } {
         ;;
 
         (u)
-        in_opts[5]
+        in_opts[5]=1
+        ;;
+
+        (O)
+        in_opts[6]=1
         ;;
 
         (p)
@@ -191,7 +197,17 @@ if (( $allArgsCount || $hasDevices==0 )) && (( $in_opts[4]==0 )) {
             apkPath=app/build/outputs/apk/$channel/$allKnowChannel/app-$channel-$allKnowChannel.apk
             echo install $apkPath
             adb install -r -t $apkPath
+
+            if (( $? )) {
+                sendNotification Error "install failed"
+                exit 1
+            }
         }
+    }
+
+    if (( $in_opts[6] )){
+        # 打开finder
+        open app/build/outputs/apk/$channel/$allKnowChannel
     }
 }
 
@@ -201,6 +217,6 @@ if (( $hasDevices )) {
     echo launching $launchActivity
     adb shell am start $launchActivity
 }
-echo "\r\n----------   complete   ----------"
 
+echo "\r\n----------   complete   ----------"
 sendNotification "Complete!" ${gradleScriptSuffix}
