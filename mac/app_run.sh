@@ -107,7 +107,7 @@ upcaseFirstLetter() {
 # 读当前的variant
 readCurrentVariant() {
 
-    filename=$(pwd)"/.idea/modules/app/Deji-dev.app.iml"
+    filename=$(pwd)"/.idea/modules/app/Deji-release.app.iml"
     echo "${filename}"
     lineKeyWord="SELECTED_BUILD_VARIANT"
 
@@ -171,6 +171,11 @@ if (( $allArgsCount || $hasDevices==0 )) && (( $in_opts[4]==0 )) {
     # 通过首字母大写 拼接gradle命令的后半截
     gradleScriptSuffix=$(upcaseFirstLetter $channel)$(upcaseFirstLetter $allKnowChannel)
     echo channel is $gradleScriptSuffix
+echo ($in_opts[6])
+    if (( $in_opts[6] )) {
+     open app/build/outputs/apk/$channel/$allKnowChannel
+    }
+    exit 0
 
     if [[ $#gradleScriptSuffix == 0 ]] {
         sendNotification Error "channel error"
@@ -184,7 +189,7 @@ if (( $allArgsCount || $hasDevices==0 )) && (( $in_opts[4]==0 )) {
         ./gradlew $in_opts[1] install$gradleScriptSuffix
     } else {
         # 如果不指定为install 则打包
-        if (( $in_opts[2] == 0 ))  {
+        if (( $in_opts[2] == 0 )) {
             # 执行打包命令 assemblePackage
             echo run gradlew $in_opts[1] assemble$gradleScriptSuffix
             ./gradlew $in_opts[1] assemble$gradleScriptSuffix
@@ -205,8 +210,9 @@ if (( $allArgsCount || $hasDevices==0 )) && (( $in_opts[4]==0 )) {
         }
     }
 
-    if (( $in_opts[6] )){
+    if (( $in_opts[6] )) {
         # 打开finder
+        echo open app/build/outputs/apk/$channel/$allKnowChannel
         open app/build/outputs/apk/$channel/$allKnowChannel
     }
 }
