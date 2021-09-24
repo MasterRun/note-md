@@ -142,7 +142,9 @@ public class TypefaceUtils {
 
 ## 2.更改webview页面字体
 
-1. 在`WebViewClient#onPageFinished`方法中注入js方法设置h5页面字体
+1. 在h5中声明字体，或原生注入代码，目的使h5页面加载时有字体请求
+
+在`WebViewClient#onPageFinished`方法中注入js方法设置h5页面字体
 
    ```java
    public void onPageFinished(WebView webview, String url) {
@@ -154,6 +156,21 @@ public class TypefaceUtils {
                     "}()");
         super.onPageFinished(view, url);
    }
+   ```
+
+   或H5在其页面中声明字体
+
+   ```html
+    <style type="text/css">
+            @font-face {
+                    font-family: MyCustomFont;
+                    src: url("./font/child_GBK.ttf");
+            }
+
+            * {
+                    font-family: MyCustomFont !important;
+            }
+    </style>
    ```
 
 2. 在`WebViewClient#shouldInterceptRequest`方法中拦截字体，改为assets中的字体
