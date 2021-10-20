@@ -295,6 +295,7 @@ object LogcatUtil {
         var str = ""
         try {
             str = gson.toJson(`object`)
+            //e("${any} --> ")
         } catch (e: Exception) {
             e.printStackTrace()
             str = `object`.toString()
@@ -317,6 +318,21 @@ object LogcatUtil {
         }
         return formatStr
     }
+
+/** 建议排除
+    val gson = GsonBuilder()
+    .registerTypeHierarchyAdapter(Context::class.java, object : JsonSerializer<Context> {
+        override fun serialize(src: Context?, typeOfSrc: Type?, context: JsonSerializationContext?): JsonElement {
+            return JsonPrimitive(src.toString())
+        }
+    })
+    .registerTypeHierarchyAdapter(Class::class.java, object : JsonSerializer<Class<*>> {
+        override fun serialize(src: Class<*>?, typeOfSrc: Type?, context: JsonSerializationContext?): JsonElement {
+            return JsonPrimitive(src.toString())
+        }
+    })
+    .create()
+*/
 }
 
 fun Any?.v() = LogcatUtil.v(this)
@@ -332,6 +348,7 @@ fun String?.e() = LogcatUtil.e(msg = this)
 ```
 
 ```java
+@Despected
 public class LogcatUtil {
 
     /**
