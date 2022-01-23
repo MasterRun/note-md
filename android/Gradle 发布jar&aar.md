@@ -83,3 +83,7 @@ afterEvaluate {
     }
 }
 ```
+
+
+## kts
+https://docs.gradle.org/5.6.3/userguide/kotlin_dsl.html
