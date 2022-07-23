@@ -43,3 +43,8 @@ Hi someone! You ve successfully authenticated, but GitHub does not provide shell
 换链接的两种方式式
 - 使用git命令原来的remote重新添加 [参考笔记](./git常用命令整理.md)
 - 直接将.git文件夹中config文件中的链接替换
+
+
+
+## 使用repo
+https://blog.csdn.net/ysy950803/article/details/104188793
