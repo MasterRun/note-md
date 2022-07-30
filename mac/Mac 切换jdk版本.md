@@ -8,17 +8,20 @@ vim .zprofile
 2. 输入以下
 
 ```zsh
-export JAVA_7_HOME=`/usr/libexec/java_home -v 1.7`
-export JAVA_8_HOME=`/usr/libexec/java_home -v 1.8`
-export JAVA_HOME=$JAVA_8_HOME
-alias jdk7="export JAVA_HOME=$JAVA_7_HOME && java -version"
+export JAVA_8_HOME=$(/usr/libexec/java_home -v 1.8)
+export JAVA_11_HOME=$(/usr/libexec/java_home -v 11)
+export JAVA_HOME=$JAVA_11_HOME
 alias jdk8="export JAVA_HOME=$JAVA_8_HOME && java -version"
+alias jdk11="export JAVA_HOME=$JAVA_11_HOME && java -version"
 ```
 
 Mac OSX 10.5+ 以后，官方建议`$JAVA_HOME`的设置用 `/usr/libexec/java_home` 代替
 也可以写绝对路径,通过`echo $JAVA_HOME` 查看JDK路径
-例如
 
+`/usr/libexec/java_home`能识别jdk主要按照一下路径放置jdk即可
+`/Library/Java/JavaVirtualMachines/jdkxxx.jdk/Contents/Home`
+
+绝对路径方式：
 ```zsh
 export JAVA_11_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home"
 export JAVA_8_HOME="/Library/Java/JavaVirtualMachines/jdk-11.0.8.jdk/Contents/Home"
