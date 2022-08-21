@@ -39,6 +39,19 @@ configurations.all {
         force 'com.android.support:support-fragment:26.1.0'
     }
 }
+//配置整个项目所依赖的库,保持指定的版本
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'androidx.lifecycle') {
+            if (!requested.name.startsWith("multidex") && !requested.name.contains("compose") && !requested.name.contains("lifecycle-extensions")) {
+                details.useVersion '2.4.0'//'27.0.0
+            }
+        } else if (requested.group == "org.jetbrains.kotlin") {
+            details.useVersion kotlin_version
+        }
+    }
+}
 ```
 
 如果还是用重复依赖，检查项目中的其他module是否是使用了不同的lib版本

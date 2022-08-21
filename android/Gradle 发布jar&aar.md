@@ -84,6 +84,41 @@ afterEvaluate {
 }
 ```
 
+提示在gradle8中，不会ComponentCreation，使用`android.disableAutomaticComponentCreation=true`可预览feature
+
+### 解决方案
+
+https://www.5axxw.com/questions/content/gquaxz
+
+根据PublishingOptions，必须定义一个android.publishing块：
+
+``` groovy
+android {
+    publishing {
+        singleVariant('release') {
+            withSourcesJar()
+            withJavadocJar()
+        }
+        // ...
+    }
+}
+```
+
+要同时定义多个变体，请执行以下操作：
+
+```groovy
+android {
+    publishing {
+        multipleVariants {
+            withSourcesJar()
+            withJavadocJar()
+            allVariants()
+        }
+    }
+}
+```
+
+然后，`components.getByName('release')`将再次被知道。
 
 ## kts
 https://docs.gradle.org/5.6.3/userguide/kotlin_dsl.html
